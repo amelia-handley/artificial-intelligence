@@ -5,10 +5,10 @@ rem - insert here the line that runs your program - make sure you pass through t
 rem examples are:
 rem myprogram.exe %1
 rem or
-rem java -jar myprogram.jar %1
+rem java -jar myprogram.jar
 
 javac readtest.java
-java readtest 
+java readtest
 
 set ENDTIME=%TIME%
 
