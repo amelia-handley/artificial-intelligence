@@ -1,38 +1,31 @@
 package com.coursework;
 
+import java.util.ArrayList;
+
 class Cave {
+    //public int caveNumber;
     public int x;
     public int y;
+    //public int connections;
+    public ArrayList<Cave> connections;
 
     public Cave() {
+        // Cave number
+        //this.caveNumber = caveNumber;
         // x coordinate
         this.x = x;
         // y coordinate
         this.y = y;
         // connection to other caves
+        this.connections = new ArrayList<>();
         // distance to other caves (connected to)
         // cave that current cave is closest to
     }
 
-    public int getXCoord() {
-        return x;
-    }
-
-    public void setXCoord() {
-        this.x = x;
-    }
-
-    public int getYCoord() {
-        return this.y;
-    }
-
-    public void setYCoord() {
-        this.y = y;
-    }
 
     @Override
     public String toString() {
-        return String.format("X=" + x + ", Y=" + y);
+        return String.format("(" + x + "," + y + ")");
     }
 }
 // total number of caves
