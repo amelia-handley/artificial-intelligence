@@ -65,31 +65,19 @@ public class Coursework
             //System.out.println(connectionNodes);
         }
 
-        // Add connections between the caves
-        /**
-        for(int i=connection; i<=cavesNumber-1; i++)
-        {
-            ArrayList<Cave> connectCave = new ArrayList<Cave>();
-            for(int j=0; j<cavesNumber; j++)
-            {
-                Cave connectionMade = new Cave();
-                if(values[i] == "1"){
-                    connectionMade.connections = connectionNodes;
-                }
-                connectCave.add(connectionMade);
-            }
-        }
-         **/
+        // Add connections between caves
         for(int i=0; i<=cavesNumber-1; i++){
             for(int j=0; j<=cavesNumber-1; j++){
+                // if a 1 is found in the matrix, add the connections.
                 if(connectionNodes[i][j] == 1) {
                     allCaves.get(j).connections.add(allCaves.get(i));
                 }
             }
         }
 
+        //print out caves
         for(int i=0; i< cavesNumber-1; i++){
-            System.out.println(" Cave: " + allCaves.get(i).caveNumber + " has neighbours: " + allCaves.get(i).connections);
+            System.out.println("Cave " + allCaves.get(i).caveNumber + " has neighbours: " + allCaves.get(i).connections);
         }
     }
 }
