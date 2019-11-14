@@ -3,29 +3,27 @@ package com.coursework;
 import java.util.ArrayList;
 
 class Cave {
-    //public int caveNumber;
+    public int caveNumber;
     public int x;
     public int y;
-    //public int connections;
-    public ArrayList<Cave> connections;
+    ArrayList<Cave> connections;
 
     public Cave() {
         // Cave number
-        //this.caveNumber = caveNumber;
+        this.caveNumber = caveNumber;
         // x coordinate
         this.x = x;
         // y coordinate
         this.y = y;
         // connection to other caves
-        this.connections = new ArrayList<>();
+        this.connections = new ArrayList<>(); // i
         // distance to other caves (connected to)
         // cave that current cave is closest to
     }
 
-
     @Override
     public String toString() {
-        return String.format("(" + x + "," + y + ")");
+        return String.format(caveNumber + "(" + x + "," + y + ")" );
     }
 }
-// total number of caves
+

@@ -32,6 +32,7 @@ public class Coursework
         // create array list
         ArrayList<Cave> allCaves = new ArrayList<Cave>();
         // start for loop at 1, as the first element in the array is the number of caves
+        int counter = 1; // count the number of caves
         for(int i=1; i<cavesNumber*2; i+=2)
         {
             // Create newCave
@@ -40,101 +41,56 @@ public class Coursework
             newCave.x = Integer.parseInt(values[i]);
             // Find Y Coordinate
             newCave.y = Integer.parseInt(values[i+1]);//[2] element
-
+            // Store the cave as a number
+            newCave.caveNumber = counter;
             //Add cave
             allCaves.add(newCave);
+            counter++; // increases cave number
         }
-        System.out.println(allCaves);
+        //System.out.println(allCaves);
 
-        // Set the connection Matrix to null
-        String[][] connectionMatrix = new String[cavesNumber][cavesNumber];
-        for (int i=0; i<cavesNumber; i++){
-            for (int j=0; i<=cavesNumber-2; j++) {
-                connectionMatrix[i][j] = null;
-            }
-        }
+        //loop through connections
+        // for loop to drop down every 7?
+            //when connection == 1 add to arraylist
+            //when i gets over 7 increase counter to move to the next arraylist position
 
-        // Create matrix
-        int connection = cavesNumber*2+1;
-        int y;
-        for(y=0; y<cavesNumber; y++);
-        {
-            for(int x=0; x<cavesNumber; x++)
-            {
-                connectionMatrix[x][y] = values[x + connection];
-                connection++;
-            }
-        }
-
-        for (int i=0; i<cavesNumber; i++){
-            for (int j=0; i<cavesNumber; j++) {
-                System.out.println(connectionMatrix + ",");
-            }
-        }
-
-
-
-        /**
-        // Create a 2D array to search through the matrix to determine connections
-        int index =0; // acts as a counter
+        //Create connection matrix
         int connection=cavesNumber*2+1; // start the matrix after the number of caves and the coordinates
-        for (int i=connection; i<=values.length; i++) {
-            for(int j=connection; j<=values.length; j++){
-                connectionMatrix[i][j] =
+        int[][]connectionNodes = new int[cavesNumber][cavesNumber];
+        for (int i=0; i<=cavesNumber-1; i++) {
+            for (int j = 0; j <= cavesNumber-1; j++) {
+                //System.out.println("i = " + i + "j = " + j + " --------" + (values[(connection + j) + cavesNumber * i]));
+                connectionNodes[i][j] = Integer.parseInt(values[(connection + j) + cavesNumber*i]);
             }
-            //System.out.println(index);
-            index++;
+            //System.out.println(connectionNodes);
         }
-        **/
 
-        /*
-        // Matrix
-        int [][] matrix;
-        int j =0;
-        for(j<7)
+        // Add connections between the caves
+        /**
+        for(int i=connection; i<=cavesNumber-1; i++)
         {
-            for(int i=0; i<7; i++) {
-                //add to array
-                matrix[i*j];
+            ArrayList<Cave> connectCave = new ArrayList<Cave>();
+            for(int j=0; j<cavesNumber; j++)
+            {
+                Cave connectionMade = new Cave();
+                if(values[i] == "1"){
+                    connectionMade.connections = connectionNodes;
+                }
+                connectCave.add(connectionMade);
             }
-            j++;
         }
-
-
-
-
-        int index =0; // acts as a counter
-        String[][] connectionMatrix = new String[cavesNumber][cavesNumber];
-        int connection=cavesNumber*2+1;
-        //int counter =0;
-        for (int i=connection; i<=values.length; i++) {
-            for(int j=connection; j<=values.length; j++){
-                int counter =0;
-                if(connectionMatrix[i][j].equals("1")){
-                    // add to connections
+         **/
+        for(int i=0; i<=cavesNumber-1; i++){
+            for(int j=0; j<=cavesNumber-1; j++){
+                if(connectionNodes[i][j] == 1) {
+                    allCaves.get(j).connections.add(allCaves.get(i));
                 }
             }
-            System.out.println(index);
-            index++;
         }
-         /*
-         int connection=cavesNumber*2+1; // skip the number of caves and the coordinates
-        for (int i=connection; i<=input.length; i++) {
-            ArrayList<Cave> links = new ArrayList<Cave>()
-            if(input[i].equals("1")){
-                input
-                links.add(); // add connection to cave
-            }
 
-        int[] connectionMatrix = new int[cavesNumber];
-        int connection=cavesNumber*2+1;
-        for (int i=connection; i<=cavesNumber; i++) {
-                int counter = 0;
-                for(int )
-                }
-
-        */
-
+        for(int i=0; i< cavesNumber-1; i++){
+            System.out.println(" Cave: " + allCaves.get(i).caveNumber + " has neighbours: " + allCaves.get(i).connections);
+        }
     }
 }
 
