@@ -7,6 +7,7 @@ class Cave {
     public int x;
     public int y;
     ArrayList<Cave> connections;
+    public double length;
 
     public Cave() {
         // Cave number
@@ -19,6 +20,7 @@ class Cave {
         this.connections = new ArrayList<>(); // i
         // distance to other caves (connected to)
         // cave that current cave is closest to
+        this.length = length;
     }
 
     @Override
