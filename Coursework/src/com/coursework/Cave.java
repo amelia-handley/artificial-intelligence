@@ -1,16 +1,16 @@
 package com.coursework;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 class Cave {
     public int caveNumber;
-    public int x;
-    public int y;
+    public double x;
+    public double y;
     ArrayList<Cave> connections;
     Map<Cave, Double> edges;
     public double distance;
+    public Cave nearestNeighbour;
+    public double shortestPath;
 
     public Cave() {
         // Cave number
@@ -23,13 +23,42 @@ class Cave {
         this.connections = new ArrayList<>(); // i
         // distance to other caves (connected to)
         // cave that current cave is closest to
-        this.distance = distance;
+        distance = Double.MAX_VALUE;
         this.edges = new HashMap<>();
+        nearestNeighbour = null;
+        shortestPath = Double.MAX_VALUE;
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public int getCaveNumber() {
+        return caveNumber;
+    }
+
+    public double getShortestPath() {
+        return shortestPath;
+    }
+
+    public void setShortestPath() {
+        this.shortestPath = shortestPath;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(){
+        this.distance = distance;
+    }
     @Override
     public String toString() {
-        return String.format(caveNumber + "(" + x + "," + y + ")" );
+        return "caveNumber + '(' + x + y + ')' ";
     }
 }
 
