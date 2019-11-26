@@ -7,9 +7,8 @@ class Cave {
     public double x;
     public double y;
     ArrayList<Cave> connections;
-    Map<Cave, Double> edges;
     public double distance;
-    public Cave nearestNeighbour;
+    public double nearestNeighbour;
     public double shortestPath;
 
     public Cave() {
@@ -23,9 +22,8 @@ class Cave {
         this.connections = new ArrayList<>(); // i
         // distance to other caves (connected to)
         // cave that current cave is closest to
+        this.nearestNeighbour = nearestNeighbour;
         distance = Double.MAX_VALUE;
-        this.edges = new HashMap<>();
-        nearestNeighbour = null;
         shortestPath = Double.MAX_VALUE;
     }
 
@@ -49,16 +47,33 @@ class Cave {
         this.shortestPath = shortestPath;
     }
 
+
     public double getDistance() {
         return distance;
+    }
+    public double getShortestNeighbour(){
+        return nearestNeighbour;
+    }
+
+    public void  setShortestNeighbour(){
+        this.nearestNeighbour = nearestNeighbour;
     }
 
     public void setDistance(){
         this.distance = distance;
     }
+
+    public void addConnections(Cave other){
+        this.connections.add(other);
+    }
+
+    public ArrayList<Cave> getConnections() {
+        return connections;
+    }
+
     @Override
     public String toString() {
-        return "caveNumber + '(' + x + y + ')' ";
+        return (" " + caveNumber + " ");
     }
 }
 
