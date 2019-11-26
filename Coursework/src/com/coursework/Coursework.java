@@ -6,8 +6,6 @@ import java.util.*;
 
 public class Coursework
 {
-    // array list to sort priority queue
-
     // Calculate Distance between Caves
     static double pythagoras(Cave firstCave, Cave lastCave) {
         double distanceOfX = firstCave.x - lastCave.x;
@@ -16,42 +14,6 @@ public class Coursework
         double distance = Math.sqrt(((distanceOfY * distanceOfY) + (distanceOfX * distanceOfX)));
         return distance;
     }
-
-    /*
-    // Get the lowest distance for each cave connection within the toBeExplored arraylist
-    private static Cave getLowDistanceCave(ArrayList<Cave> tobeExplored){
-        Cave lowestDistanceNode = null;
-        double lowestDistance = Integer.MAX_VALUE;
-        for (Cave cave : tobeExplored)
-        {
-            for(Cave connection : cave.connections ) {
-                //System.out.println("current cave: " + cave + " & curr connection: " + connection);
-                double caveDistance = pythagoras(cave, connection);
-                //System.out.println("dis = " + caveDistance);
-                cave.edges.put(connection, caveDistance);
-                //System.out.println(" connection: " + connection + " with dis: " + caveDistance + "added to cave: " + cave + " edges");
-                if (caveDistance < lowestDistance) {
-                    lowestDistance = caveDistance;
-                    lowestDistanceNode = connection;
-                }
-            }
-        }
-        //System.out.println("----------------" + lowestDistanceNode);
-        return lowestDistanceNode;
-    } */
-
-    /*
-    // compares the distance with newly calculated one the current path with the new path
-    private static void calculateShortest(Cave neighbourCave, double edgeWeight, Cave currentCave ){
-        double currentDistance = currentCave.getDistance();
-        if(currentDistance + edgeWeight < neighbourCave.getDistance()){
-            neighbourCave.setDistance(currentDistance + edgeWeight);
-            LinkedList<Cave> minimumPath = new LinkedList<Cave>(currentCave.getDistance());
-            minimumPath.add(currentCave);
-            neighbourCave.setShortestPath(minimumPath);
-        }
-    }*/
-
 
     public static void main(String[] args) {
         List<String> inputFile;
@@ -131,60 +93,41 @@ public class Coursework
         Cave firstCave = allCaves.get(0); // set the first cave to the first element in the array
         Cave lastCave = allCaves.get(cavesNumber-1); ///cavesNumber-1
         toBeExplored.add(firstCave); // starting search for the route at the first cave
-        firstCave.distance = 0;
-        /*
-        // While there are still caves to be explored
-        while (toBeExplored.size() != 0) {
-            Cave currentCave= getLowDistanceCave(toBeExplored);
-            toBeExplored.remove(currentCave);
-            for (Map.Entry <Cave, Double> neighbours : currentCave.edges.entrySet()){
-                Cave neighbourCave = neighbours.getKey();
-                double edgeWeight = neighbours.getValue();
-                if(!exploredCaves.contains(neighbourCave)){
-                    calculateShortest(neighbourCave, edgeWeight, currentCave);
-                    System.out.println("------" + neighbourCave);
-                    toBeExplored.add(neighbourCave);
-                }
-            }
-            exploredCaves.add(currentCave);
-        }
-        System.out.println(exploredCaves);
-        */
-        Cave lowestDistanceNode;
+        Cave visitedCave;
+
+        Cave lowestDistanceNode = null;
+        double lowestDistance = Integer.MAX_VALUE;
         do {
-            Cave visitedCave = toBeExplored.get(0);
+            visitedCave = toBeExplored.get(0);
+            toBeExplored.remove(visitedCave); // remove the visited cave from the
             for (Cave connections : visitedCave.getConnections()) {
                 //System.out.println(connections);
                 // Make sure that it does not re-explore caves already been to
                 if (!exploredCaves.contains(connections) && connections != visitedCave) {
+                    // if it finds a cave that it does not have connections to, add it
                     if (!toBeExplored.contains(connections)) {
+                        toBeExplored.add(connections);
+                    }
                         //System.out.println("current cave: " + cave + " & curr connection: " + connection);
-                        double caveDistance = pythagoras(visitedCave, connections);
-                        double distanceFromStart= pythagoras(firstCave, connections);
-                        double distanceToConnection = caveDistance + distanceFromStart;
-                        if (distanceToConnection < connections.getShortestPath()) {
-                            lowestDistanceNode = connections;
-                            toBeExplored.add(lowestDistanceNode);
-                            System.out.println("lowest distance node: " + lowestDistanceNode);
-                        }
+                    double caveDistance = pythagoras(visitedCave, connections);
+                    System.out.println("cave distance: " + caveDistance);
+                    double distanceFromStart= pythagoras(firstCave, connections);
+                    System.out.println("distance from start: " + distanceFromStart + " " + visitedCave);
+                    double distanceToConnection = caveDistance + distanceFromStart;
+                    System.out.println("distance to connection" + distanceToConnection);
+                    if ( caveDistance < distanceFromStart) {
+                        connections.setShortestPath(caveDistance);
+                        connections.setShortestNeighbour(visitedCave);
+                        //System.out.println("lowest distance node: " + lowestDistanceNode);
                     }
                 }
             }
-            toBeExplored.remove(visitedCave);
             exploredCaves.add(visitedCave);
+
         } while (firstCave!=lastCave && toBeExplored.size() > 0);
         System.out.println("Caves explored" + exploredCaves);
         // print out cave path
 
-        /**
-        String completedRoute="";
-        if(exploredCaves.contains(lastCave))
-        {
-            do{
-               completedRoute =
-            }while
-        }
-         **/
 
     }
 }

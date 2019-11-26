@@ -1,8 +1,10 @@
 package com.coursework;
 
 import java.util.*;
+import java.util.Comparator;
 
-class Cave {
+class Cave implements Comparator<Cave> {
+
     public int caveNumber;
     public double x;
     public double y;
@@ -43,7 +45,7 @@ class Cave {
         return shortestPath;
     }
 
-    public void setShortestPath() {
+    public void setShortestPath(double distanceToConnection) {
         this.shortestPath = shortestPath;
     }
 
@@ -55,7 +57,7 @@ class Cave {
         return nearestNeighbour;
     }
 
-    public void  setShortestNeighbour(){
+    public void  setShortestNeighbour(Cave visitedCave){
         this.nearestNeighbour = nearestNeighbour;
     }
 
@@ -71,6 +73,9 @@ class Cave {
         return connections;
     }
 
+    public int compare(Cave a, Cave b) {
+        return Double.compare(a.distance, b.distance);
+    }
     @Override
     public String toString() {
         return (" " + caveNumber + " ");
