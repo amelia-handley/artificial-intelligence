@@ -1,17 +1,17 @@
 package com.coursework;
 
 import java.util.*;
-import java.util.Comparator;
 
-class Cave implements Comparator<Cave> {
+
+class Cave {
 
     public int caveNumber;
     public double x;
     public double y;
     ArrayList<Cave> connections;
     public double distance;
-    public double nearestNeighbour;
-    public double shortestPath;
+    public Cave nearestNeighbour;
+    //public double shortestPath;
 
     public Cave() {
         // Cave number
@@ -22,63 +22,28 @@ class Cave implements Comparator<Cave> {
         this.y = y;
         // connection to other caves
         this.connections = new ArrayList<>(); // i
-        // distance to other caves (connected to)
+        // distance to other caves (connected to) - set to max value as we do not know distance yet
+        distance = Double.MAX_VALUE;
         // cave that current cave is closest to
         this.nearestNeighbour = nearestNeighbour;
-        distance = Double.MAX_VALUE;
-        shortestPath = Double.MAX_VALUE;
+        // store shortest path (arraylist?)
+        //shortestPath = Double.MAX_VALUE;
     }
 
-    public double getX() {
-        return x;
+    // getters and setters
+    // add connections between caves from the current cave
+    public void addConnections(Cave current){
+        this.connections.add(current);
     }
 
-    public double getY() {
-        return y;
-    }
-
-    public int getCaveNumber() {
-        return caveNumber;
-    }
-
-    public double getShortestPath() {
-        return shortestPath;
-    }
-
-    public void setShortestPath(double distanceToConnection) {
-        this.shortestPath = shortestPath;
-    }
-
-
-    public double getDistance() {
-        return distance;
-    }
-    public double getShortestNeighbour(){
-        return nearestNeighbour;
-    }
-
-    public void  setShortestNeighbour(Cave visitedCave){
-        this.nearestNeighbour = nearestNeighbour;
-    }
-
-    public void setDistance(){
-        this.distance = distance;
-    }
-
-    public void addConnections(Cave other){
-        this.connections.add(other);
-    }
-
+    // get connections from the array list
     public ArrayList<Cave> getConnections() {
         return connections;
     }
 
-    public int compare(Cave a, Cave b) {
-        return Double.compare(a.distance, b.distance);
-    }
     @Override
     public String toString() {
-        return (" " + caveNumber + " ");
+        return (" " + caveNumber);
     }
 }
 
